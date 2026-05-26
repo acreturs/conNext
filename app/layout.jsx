@@ -3,12 +3,12 @@ import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 
 export const metadata = {
-  title: "nextria — KI-Beratung aus München",
+  title: "IT - Beratung München – Ihr Weg zur Digitalisierung",
   description:
     "Kleine, unabhängige IT-Beratung aus München. Wir helfen Unternehmen, KI und Digitalisierung pragmatisch und mit messbarer Wirkung umzusetzen.",
   metadataBase: new URL("https://nextria.de"),
   openGraph: {
-    title: "nextria — KI-Beratung aus München",
+    title: "IT - Beratung München – Ihr Weg zur Digitalisierung",
     description:
       "Wir helfen Ihrem Unternehmen, KI und Digitalisierung pragmatisch und mit messbarer Wirkung umzusetzen.",
     locale: "de_DE",
