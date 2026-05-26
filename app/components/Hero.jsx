@@ -1,3 +1,7 @@
+"use client";
+
+import { track } from "@vercel/analytics";
+
 export default function Hero() {
   return (
     <section id="top" className="hero">
@@ -15,7 +19,11 @@ export default function Hero() {
           und mit messbarer Wirkung umzusetzen.
         </p>
         <div className="hero-actions">
-          <a href="#termin" className="btn btn-primary">
+          <a
+            href="#termin"
+            className="btn btn-primary"
+            onClick={() => track("cta_click", { ort: "hero" })}
+          >
             30 Min Erstgespräch
             <svg className="btn-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { track } from "@vercel/analytics";
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -25,7 +26,11 @@ export default function Nav() {
           <a href="#ueber">Über uns</a>
           <a href="#termin">Kontakt</a>
         </div>
-        <a href="#termin" className="nav-cta">
+        <a
+          href="#termin"
+          className="nav-cta"
+          onClick={() => track("cta_click", { ort: "nav" })}
+        >
           Termin buchen
           <svg className="nav-cta-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none">
             <path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />

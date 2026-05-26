@@ -1,5 +1,7 @@
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
 export const metadata = {
@@ -23,7 +25,11 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang="de" className={`${GeistSans.variable} ${GeistMono.variable}`}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Analytics />
+        <SpeedInsights />
+      </body>
     </html>
   );
 }

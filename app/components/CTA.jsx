@@ -1,9 +1,40 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { track } from "@vercel/analytics";
 
 export default function CTA() {
   const [embedFailed, setEmbedFailed] = useState(false);
+
+  // Calendly meldet Funnel-Schritte per postMessage an das Parent-Fenster.
+  // Damit tracken wir, wer den Kalender wirklich nutzt — bis zur Buchung.
+  useEffect(() => {
+    const onMessage = (e) => {
+      if (
+        e.origin !== "https://calendly.com" ||
+        typeof e.data?.event !== "string" ||
+        !e.data.event.startsWith("calendly.")
+      ) {
+        return;
+      }
+      switch (e.data.event) {
+        case "calendly.event_type_viewed":
+          track("calendly_geoeffnet");
+          break;
+        case "calendly.date_and_time_selected":
+          track("calendly_termin_gewaehlt");
+          break;
+        case "calendly.event_scheduled":
+          // Die eigentliche Conversion: Termin verbindlich gebucht.
+          track("termin_gebucht");
+          break;
+        default:
+          break;
+      }
+    };
+    window.addEventListener("message", onMessage);
+    return () => window.removeEventListener("message", onMessage);
+  }, []);
 
   return (
     <section id="termin" className="cta">
@@ -64,6 +95,7 @@ export default function CTA() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-primary"
+                onClick={() => track("calendly_fallback_klick")}
               >
                 Termin auf Calendly buchen
                 <svg className="btn-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none">
